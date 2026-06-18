@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div class="admin-shell">
+      <aside
+        class="admin-sidebar d-flex flex-column"
+        id="admin-sidebar-mount"
+      ></aside>
+
+      <div class="admin-main">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="display italic-slant" style="font-size: var(--fs-lg)">
+            Dashboard
+          </h2>
+          <button class="rf-icon-btn" data-theme-toggle>
+            <i class="bi bi-moon-fill"></i><i class="bi bi-sun-fill"></i>
+          </button>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-3 col-6">
+            <div class="admin-kpi">
+              <div class="admin-kpi__label">Total Revenue</div>
+              <div class="admin-kpi__value" id="kpi-revenue">0đ</div>
+              <div class="admin-kpi__delta up">
+                <i class="bi bi-arrow-up-short"></i> 12.4% vs last month
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="admin-kpi">
+              <div class="admin-kpi__label">Orders</div>
+              <div class="admin-kpi__value" id="kpi-orders">0</div>
+              <div class="admin-kpi__delta up">
+                <i class="bi bi-arrow-up-short"></i> 8.1%
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="admin-kpi">
+              <div class="admin-kpi__label">Products</div>
+              <div class="admin-kpi__value" id="kpi-products">0</div>
+              <div class="admin-kpi__delta down" id="kpi-products-delta">
+                <i class="bi bi-arrow-down-short"></i> 2 low stock
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6">
+            <div class="admin-kpi">
+              <div class="admin-kpi__label">Customers</div>
+              <div class="admin-kpi__value" id="kpi-customers">214</div>
+              <div class="admin-kpi__delta up">
+                <i class="bi bi-arrow-up-short"></i> 5.6%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-7">
+            <div class="admin-table-wrap">
+              <div
+                class="p-3"
+                style="border-bottom: 1px solid var(--border); font-weight: 700"
+              >
+                Recent Orders
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-orders-body"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="admin-table-wrap">
+              <div
+                class="p-3"
+                style="border-bottom: 1px solid var(--border); font-weight: 700"
+              >
+                Low Stock Alerts
+              </div>
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Stock</th>
+                  </tr>
+                </thead>
+                <tbody id="low-stock-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/admin-layout.js"></script>
+    <script>
+      if (rfAdminGuard()) {
+        rfApplyTheme();
+        rfInjectAdminLayout("dashboard");
+        document
+          .querySelector("[data-theme-toggle]")
+          .addEventListener("click", rfToggleTheme);
+
+        const revenue = RF_PRODUCTS.reduce((s, p) => s + p.price * 3, 0);
+        document.getElementById("kpi-revenue").textContent =
+          rfFormatVND(revenue);
+        document.getElementById("kpi-orders").textContent =
+          RF_STATE.orders.length + 142;
+        document.getElementById("kpi-products").textContent =
+          RF_PRODUCTS.length;
+
+        const mockOrders = [
+          {
+            id: "RF88213441",
+            customer: "Minh Tran",
+            status: "delivered",
+            total: 2450000,
+          },
+          {
+            id: "RF88213442",
+            customer: "Sarah Kim",
+            status: "shipped",
+            total: 1890000,
+          },
+          {
+            id: "RF88213443",
+            customer: "David Le",
+            status: "pending",
+            total: 3120000,
+          },
+          {
+            id: "RF88213444",
+            customer: "Anna Pham",
+            status: "delivered",
+            total: 980000,
+          },
+        ].concat(
+          RF_STATE.orders
+            .slice(-3)
+            .map((o) => ({
+              id: o.id,
+              customer: o.shipping?.fullname || "Guest",
+              status: o.status,
+              total: o.total,
+            })),
+        );
+
+        document.getElementById("recent-orders-body").innerHTML = mockOrders
+          .map(
+            (o) => `
+      <tr><td>#${o.id}</td><td>${o.customer}</td><td><span class="status-pill ${o.status}">${o.status}</span></td><td>${rfFormatVND(o.total)}</td></tr>
+    `,
+          )
+          .join("");
+
+        const lowStock = RF_PRODUCTS.filter((p) => p.stock > 0 && p.stock < 6);
+        document.getElementById("kpi-products-delta").innerHTML =
+          `<i class="bi bi-arrow-down-short"></i> ${lowStock.length} low stock`;
+        document.getElementById("low-stock-body").innerHTML = lowStock
+          .slice(0, 6)
+          .map(
+            (p) => `
+      <tr><td class="d-flex align-items-center gap-2"><img src="${p.image}">${p.name}</td><td><span class="stock-pill low">${p.stock} left</span></td></tr>
+    `,
+          )
+          .join("");
+      }
+    </script>
+  </body>
+</html>

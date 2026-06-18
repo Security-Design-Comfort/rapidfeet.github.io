@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-theme="dark" class="form-rf" style="background: var(--ink)">
+    <main
+      style="
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--sp-5);
+      "
+    >
+      <div style="width: 100%; max-width: 400px">
+        <div class="text-center mb-5">
+          <img
+            src="assets/logo-full-white.svg"
+            style="height: 32px"
+            alt="Rapidfeet"
+          />
+          <p
+            class="text-faint mt-3"
+            style="
+              font-size: var(--fs-xs);
+              text-transform: uppercase;
+              letter-spacing: 0.1em;
+            "
+          >
+            Admin Console
+          </p>
+        </div>
+        <div
+          style="
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            padding: var(--sp-6);
+          "
+        >
+          <form id="admin-login-form" novalidate>
+            <div class="mb-3">
+              <label>Username</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                required
+                value="admin"
+              />
+            </div>
+            <div class="mb-4">
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                required
+                value="admin123"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn-rf btn-rf-primary btn-rf-block btn-rf-lg"
+            >
+              Sign in
+            </button>
+          </form>
+          <p
+            class="text-faint mt-3 text-center"
+            style="font-size: var(--fs-xs)"
+          >
+            Demo mode: any username/password works.
+          </p>
+        </div>
+        <a
+          href="index.html"
+          class="d-block text-center mt-4 text-faint"
+          style="font-size: var(--fs-sm)"
+          ><i class="bi bi-arrow-left"></i> Back to storefront</a
+        >
+      </div>
+    </main>
+
+    <script src="js/store.js"></script>
+    <script>
+      document
+        .getElementById("admin-login-form")
+        .addEventListener("submit", (e) => {
+          e.preventDefault();
+          localStorage.setItem("rapidfeet_admin_session", "1");
+          window.location.href = "admin-dashboard.html";
+        });
+    </script>
+  </body>
+</html>

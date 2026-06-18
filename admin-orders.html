@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Orders — Rapidfeet Admin</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body class="form-rf">
+    <div class="admin-shell">
+      <aside
+        class="admin-sidebar d-flex flex-column"
+        id="admin-sidebar-mount"
+      ></aside>
+
+      <div class="admin-main">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="display italic-slant" style="font-size: var(--fs-lg)">
+            Orders
+          </h2>
+          <button class="rf-icon-btn" data-theme-toggle>
+            <i class="bi bi-moon-fill"></i><i class="bi bi-sun-fill"></i>
+          </button>
+        </div>
+
+        <div class="d-flex gap-2 mb-3">
+          <select
+            class="form-select"
+            id="order-status-filter"
+            style="
+              max-width: 200px;
+              background: var(--bg-elevated);
+              border: 1.5px solid var(--border);
+              color: var(--text);
+            "
+          >
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="admin-table-wrap">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer</th>
+                  <th>Date</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-orders-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/admin-layout.js"></script>
+    <script>
+      if (rfAdminGuard()) {
+        rfApplyTheme();
+        rfInjectAdminLayout("orders");
+        document
+          .querySelector("[data-theme-toggle]")
+          .addEventListener("click", rfToggleTheme);
+
+        const mockOrders = [
+          {
+            id: "RF88213441",
+            customer: "Minh Tran",
+            date: "2026-06-15",
+            items: 2,
+            total: 2450000,
+            status: "delivered",
+          },
+          {
+            id: "RF88213442",
+            customer: "Sarah Kim",
+            date: "2026-06-16",
+            items: 1,
+            total: 1890000,
+            status: "shipped",
+          },
+          {
+            id: "RF88213443",
+            customer: "David Le",
+            date: "2026-06-17",
+            items: 3,
+            total: 3120000,
+            status: "pending",
+          },
+          {
+            id: "RF88213444",
+            customer: "Anna Pham",
+            date: "2026-06-14",
+            items: 1,
+            total: 980000,
+            status: "delivered",
+          },
+          {
+            id: "RF88213445",
+            customer: "Carlos Mendez",
+            date: "2026-06-12",
+            items: 2,
+            total: 2100000,
+            status: "cancelled",
+          },
+        ].concat(
+          RF_STATE.orders.map((o) => ({
+            id: o.id,
+            customer: o.shipping?.fullname || "Guest",
+            date: o.date.slice(0, 10),
+            items: o.items.reduce((s, i) => s + i.qty, 0),
+            total: o.total,
+            status: o.status,
+          })),
+        );
+
+        function render() {
+          const filter = document.getElementById("order-status-filter").value;
+          const list = filter
+            ? mockOrders.filter((o) => o.status === filter)
+            : mockOrders;
+          document.getElementById("admin-orders-body").innerHTML = list
+            .map(
+              (o) => `
+        <tr>
+          <td>#${o.id}</td><td>${o.customer}</td><td>${o.date}</td><td>${o.items}</td><td>${rfFormatVND(o.total)}</td>
+          <td>
+            <select class="form-select form-select-sm status-select" data-order="${o.id}" style="width:auto; background:var(--bg-elevated); border:1.5px solid var(--border); color:var(--text); font-size:12px;">
+              ${["pending", "shipped", "delivered", "cancelled"].map((s) => `<option value="${s}" ${s === o.status ? "selected" : ""}>${s}</option>`).join("")}
+            </select>
+          </td>
+          <td><div class="admin-row-actions"><button title="View"><i class="bi bi-eye"></i></button></div></td>
+        </tr>`,
+            )
+            .join("");
+          document
+            .querySelectorAll(".status-select")
+            .forEach((sel) =>
+              sel.addEventListener("change", () =>
+                rfToast("Status updated to " + sel.value),
+              ),
+            );
+        }
+        document
+          .getElementById("order-status-filter")
+          .addEventListener("change", render);
+        render();
+      }
+    </script>
+  </body>
+</html>
