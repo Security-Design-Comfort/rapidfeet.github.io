@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-active="checkout" class="form-rf">
+    <div id="rf-header-mount"></div>
+
+    <main id="main">
+      <div
+        class="container-rf"
+        style="padding-bottom: var(--sp-9); max-width: 1100px"
+      >
+        <div
+          class="page-hero-sm"
+          style="border: 0; padding-bottom: 0; text-align: center"
+        >
+          <h1><span lang-en>Checkout</span><span lang-vi>Thanh toán</span></h1>
+        </div>
+        <div class="rf-stepper mt-4">
+          <div class="rf-stepper__step active" data-step-indicator="1">
+            <div class="rf-stepper__circle">1</div>
+            <span class="rf-stepper__label"
+              ><span lang-en>Shipping</span><span lang-vi>Giao hàng</span></span
+            >
+          </div>
+          <div class="rf-stepper__line"></div>
+          <div class="rf-stepper__step" data-step-indicator="2">
+            <div class="rf-stepper__circle">2</div>
+            <span class="rf-stepper__label"
+              ><span lang-en>Payment</span><span lang-vi>Thanh toán</span></span
+            >
+          </div>
+          <div class="rf-stepper__line"></div>
+          <div class="rf-stepper__step" data-step-indicator="3">
+            <div class="rf-stepper__circle">3</div>
+            <span class="rf-stepper__label"
+              ><span lang-en>Review</span><span lang-vi>Xác nhận</span></span
+            >
+          </div>
+        </div>
+
+        <div id="checkout-empty" style="display: none" class="empty-state">
+          <i class="bi bi-bag-x"></i>
+          <h3>
+            <span lang-en>Nothing to check out</span
+            ><span lang-vi>Không có gì để thanh toán</span>
+          </h3>
+          <p>
+            <span lang-en>Your cart is empty.</span
+            ><span lang-vi>Giỏ hàng của bạn đang trống.</span>
+          </p>
+          <a href="catalog.html" class="btn-rf btn-rf-primary"
+            ><span lang-en>Browse shoes</span
+            ><span lang-vi>Xem sản phẩm</span></a
+          >
+        </div>
+
+        <div class="row g-5 mt-2" id="checkout-content" style="display: none">
+          <div class="col-lg-7">
+            <!-- ===== SHIPPING ===== -->
+            <div data-step="1">
+              <h5 class="mb-4">
+                <span lang-en>Shipping information</span
+                ><span lang-vi>Thông tin giao hàng</span>
+              </h5>
+              <form id="shipping-form" novalidate>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label
+                      ><span lang-en>Full name</span
+                      ><span lang-vi>Họ và tên</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="fullname"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      <span lang-en>Please enter your name</span
+                      ><span lang-vi>Vui lòng nhập họ tên</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label
+                      ><span lang-en>Phone number</span
+                      ><span lang-vi>Số điện thoại</span></label
+                    >
+                    <input
+                      type="tel"
+                      class="form-control"
+                      name="phone"
+                      required
+                      pattern="[0-9+\s]{8,15}"
+                    />
+                    <div class="invalid-feedback">
+                      <span lang-en>Enter a valid phone number</span
+                      ><span lang-vi>Vui lòng nhập số điện thoại hợp lệ</span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label
+                      ><span lang-en>Email</span
+                      ><span lang-vi>Email</span></label
+                    >
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      <span lang-en>Enter a valid email</span
+                      ><span lang-vi>Vui lòng nhập email hợp lệ</span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label
+                      ><span lang-en>Address</span
+                      ><span lang-vi>Địa chỉ</span></label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="address"
+                      required
+                    />
+                    <div class="invalid-feedback">
+                      <span lang-en>Please enter your address</span
+                      ><span lang-vi>Vui lòng nhập địa chỉ</span>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <label
+                      ><span lang-en>Postal code</span
+                      ><span lang-vi>Mã bưu điện</span></label
+                    >
+                    <input type="text" class="form-control" name="postal" />
+                  </div>
+                  <div class="col-12">
+                    <label
+                      ><span lang-en>Order notes (optional)</span
+                      ><span lang-vi
+                        >Ghi chú đơn hàng (không bắt buộc)</span
+                      ></label
+                    >
+                    <textarea
+                      class="form-control"
+                      name="notes"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn-rf btn-rf-primary btn-rf-lg mt-4"
+                  id="to-step-2"
+                >
+                  <span lang-en>Continue to payment</span
+                  ><span lang-vi>Tiếp tục thanh toán</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </form>
+            </div>
+
+            <!-- ===== PAYMENT ===== -->
+            <div data-step="2" style="display: none">
+              <h5 class="mb-4">
+                <span lang-en>Payment method</span
+                ><span lang-vi>Phương thức thanh toán</span>
+              </h5>
+
+              <label class="payment-method mb-3" data-pay-method="cod">
+                <input type="radio" name="paymethod" value="cod" checked />
+                <i class="bi bi-cash-coin" style="font-size: 1.4rem"></i>
+                <div>
+                  <strong
+                    ><span lang-en>Cash on delivery (COD)</span
+                    ><span lang-vi>Thanh toán khi nhận hàng</span></strong
+                  >
+                  <p class="text-faint mb-0" style="font-size: var(--fs-xs)">
+                    <span lang-en>Pay with cash when your order arrives</span
+                    ><span lang-vi>Thanh toán bằng tiền mặt khi nhận hàng</span>
+                  </p>
+                </div>
+              </label>
+
+              <label class="payment-method mb-3" data-pay-method="ewallet">
+                <input type="radio" name="paymethod" value="ewallet" />
+                <i class="bi bi-wallet2" style="font-size: 1.4rem"></i>
+                <div>
+                  <strong
+                    ><span lang-en>E-wallet</span
+                    ><span lang-vi>Ví điện tử</span></strong
+                  >
+                  <p class="text-faint mb-0" style="font-size: var(--fs-xs)">
+                    MoMo · ZaloPay · VNPay
+                  </p>
+                </div>
+              </label>
+              <div
+                id="ewallet-options"
+                style="display: none"
+                class="bank-grid mb-3"
+              >
+                <div class="bank-tile" data-bank="momo">MoMo</div>
+                <div class="bank-tile" data-bank="zalopay">ZaloPay</div>
+                <div class="bank-tile" data-bank="vnpay">VNPay</div>
+              </div>
+
+              <label class="payment-method mb-3" data-pay-method="bank">
+                <input type="radio" name="paymethod" value="bank" />
+                <i class="bi bi-bank" style="font-size: 1.4rem"></i>
+                <div>
+                  <strong
+                    ><span lang-en>Bank transfer / Card</span
+                    ><span lang-vi>Chuyển khoản / Thẻ ngân hàng</span></strong
+                  >
+                  <p class="text-faint mb-0" style="font-size: var(--fs-xs)">
+                    <span lang-en
+                      >Vietnamese domestic banks via electronic payment</span
+                    ><span lang-vi
+                      >Ngân hàng nội địa qua cổng thanh toán điện tử</span
+                    >
+                  </p>
+                </div>
+              </label>
+              <div
+                id="bank-options"
+                style="display: none"
+                class="bank-grid mb-3"
+              >
+                <div class="bank-tile" data-bank="vcb">Vietcombank</div>
+                <div class="bank-tile" data-bank="tcb">Techcombank</div>
+                <div class="bank-tile" data-bank="bidv">BIDV</div>
+                <div class="bank-tile" data-bank="acb">ACB</div>
+                <div class="bank-tile" data-bank="mb">MB Bank</div>
+                <div class="bank-tile" data-bank="vpb">VPBank</div>
+                <div class="bank-tile" data-bank="stb">Sacombank</div>
+                <div class="bank-tile" data-bank="tpb">TPBank</div>
+              </div>
+
+              <!-- ===== QR PAYMENT PREVIEW =====
+               Appears once a specific e-wallet or bank tile is selected, so the
+               online-payment path feels like a real checkout flow instead of
+               just a row of logo tiles. Clearly labeled as a demo — no real
+               payment is processed, no funds move, this is a static placeholder. -->
+              <div id="qr-payment-box" style="display: none">
+                <div
+                  class="p-4"
+                  style="
+                    border: 1.5px solid var(--border);
+                    background: var(--bg-sunken);
+                  "
+                >
+                  <div class="d-flex gap-4 flex-wrap align-items-center">
+                    <div
+                      style="
+                        background: #fff;
+                        padding: 10px;
+                        border: 1px solid var(--border);
+                        flex-shrink: 0;
+                      "
+                    >
+                      <svg
+                        width="148"
+                        height="148"
+                        viewBox="0 0 148 148"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <rect width="148" height="148" fill="#fff" />
+                        <g fill="#0D0D0D">
+                          <rect x="8" y="8" width="32" height="32" />
+                          <rect
+                            x="16"
+                            y="16"
+                            width="16"
+                            height="16"
+                            fill="#fff"
+                          />
+                          <rect x="108" y="8" width="32" height="32" />
+                          <rect
+                            x="116"
+                            y="16"
+                            width="16"
+                            height="16"
+                            fill="#fff"
+                          />
+                          <rect x="8" y="108" width="32" height="32" />
+                          <rect
+                            x="16"
+                            y="116"
+                            width="16"
+                            height="16"
+                            fill="#fff"
+                          />
+                          <rect x="48" y="8" width="8" height="8" />
+                          <rect x="64" y="8" width="8" height="8" />
+                          <rect x="88" y="8" width="8" height="8" />
+                          <rect x="48" y="24" width="8" height="8" />
+                          <rect x="72" y="24" width="8" height="8" />
+                          <rect x="8" y="48" width="8" height="8" />
+                          <rect x="24" y="48" width="8" height="8" />
+                          <rect x="48" y="48" width="8" height="8" />
+                          <rect x="64" y="48" width="8" height="8" />
+                          <rect x="88" y="48" width="8" height="8" />
+                          <rect x="108" y="48" width="8" height="8" />
+                          <rect x="124" y="48" width="8" height="8" />
+                          <rect x="16" y="64" width="8" height="8" />
+                          <rect x="48" y="64" width="8" height="8" />
+                          <rect x="72" y="64" width="8" height="8" />
+                          <rect x="96" y="64" width="8" height="8" />
+                          <rect x="116" y="64" width="8" height="8" />
+                          <rect x="8" y="80" width="8" height="8" />
+                          <rect x="32" y="80" width="8" height="8" />
+                          <rect x="56" y="80" width="8" height="8" />
+                          <rect x="80" y="80" width="8" height="8" />
+                          <rect x="104" y="80" width="8" height="8" />
+                          <rect x="124" y="80" width="8" height="8" />
+                          <rect x="48" y="96" width="8" height="8" />
+                          <rect x="64" y="96" width="8" height="8" />
+                          <rect x="88" y="96" width="8" height="8" />
+                          <rect x="108" y="96" width="8" height="8" />
+                          <rect x="48" y="116" width="8" height="8" />
+                          <rect x="64" y="116" width="8" height="8" />
+                          <rect x="80" y="116" width="8" height="8" />
+                          <rect x="96" y="116" width="8" height="8" />
+                          <rect x="116" y="116" width="8" height="8" />
+                          <rect x="132" y="116" width="8" height="8" />
+                          <rect x="56" y="132" width="8" height="8" />
+                          <rect x="76" y="132" width="8" height="8" />
+                          <rect x="100" y="132" width="8" height="8" />
+                          <rect x="124" y="132" width="8" height="8" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="flex-grow-1">
+                      <p class="mb-1" style="font-weight: 700">
+                        <span lang-en>Scan to pay</span
+                        ><span lang-vi>Quét mã để thanh toán</span>
+                        <span id="qr-method-label"></span>
+                      </p>
+                      <p
+                        class="text-faint mb-2"
+                        style="font-size: var(--fs-xs)"
+                      >
+                        <span lang-en>Amount</span><span lang-vi>Số tiền</span>:
+                        <strong
+                          id="qr-amount-display"
+                          style="color: var(--text)"
+                        ></strong>
+                      </p>
+                      <p
+                        class="text-faint mb-0"
+                        style="font-size: var(--fs-xs)"
+                      >
+                        <span lang-en
+                          >Demo preview only — no real payment gateway is
+                          connected, scanning this code will not charge
+                          you.</span
+                        ><span lang-vi
+                          >Chỉ là bản xem trước demo — chưa kết nối cổng thanh
+                          toán thật, quét mã này sẽ không bị trừ tiền.</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex gap-3 mt-4">
+                <button
+                  type="button"
+                  class="btn-rf btn-rf-outline"
+                  id="to-step-1-back"
+                >
+                  <i class="bi bi-arrow-left"></i> <span lang-en>Back</span
+                  ><span lang-vi>Quay lại</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn-rf btn-rf-primary flex-grow-1"
+                  id="to-step-3"
+                >
+                  <span lang-en>Review order</span
+                  ><span lang-vi>Xác nhận đơn hàng</span>
+                  <i class="bi bi-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ===== REVIEW ===== -->
+            <div data-step="3" style="display: none">
+              <h5 class="mb-4">
+                <span lang-en>Review your order</span
+                ><span lang-vi>Xác nhận đơn hàng</span>
+              </h5>
+              <div
+                id="review-shipping-box"
+                class="p-3 mb-3"
+                style="border: 1px solid var(--border)"
+              ></div>
+              <div
+                id="review-payment-box"
+                class="p-3 mb-3"
+                style="border: 1px solid var(--border)"
+              ></div>
+              <div id="review-items-box"></div>
+              <div class="d-flex gap-3 mt-4">
+                <button
+                  type="button"
+                  class="btn-rf btn-rf-outline"
+                  id="to-step-2-back"
+                >
+                  <i class="bi bi-arrow-left"></i> <span lang-en>Back</span
+                  ><span lang-vi>Quay lại</span>
+                </button>
+                <button
+                  type="button"
+                  class="btn-rf btn-rf-ember flex-grow-1 btn-rf-lg"
+                  id="place-order-btn"
+                >
+                  <span lang-en>Place order</span><span lang-vi>Đặt hàng</span>
+                  <i class="bi bi-check2-circle"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- ===== WAITING FOR PAYMENT (QR methods only) ===== -->
+            <div
+              data-step="waiting"
+              style="display: none; text-align: center; padding: var(--sp-7) 0"
+            >
+              <div
+                class="spinner-border"
+                style="width: 48px; height: 48px; color: var(--ember)"
+                role="status"
+              ></div>
+              <h4 class="mt-4">
+                <span lang-en>Waiting for payment confirmation...</span
+                ><span lang-vi>Đang chờ xác nhận thanh toán...</span>
+              </h4>
+              <p class="text-faint mt-2">
+                <span lang-en
+                  >This is a demo — confirming automatically in a moment.</span
+                ><span lang-vi
+                  >Đây là bản demo — sẽ tự xác nhận trong vài giây.</span
+                >
+              </p>
+            </div>
+
+            <!-- ===== CONFIRMATION ===== -->
+            <div
+              data-step="done"
+              style="display: none; text-align: center; padding: var(--sp-7) 0"
+            >
+              <i
+                class="bi bi-check-circle-fill"
+                style="font-size: 4rem; color: var(--ok)"
+              ></i>
+              <h2 class="display italic-slant mt-3">
+                <span lang-en>Order confirmed!</span
+                ><span lang-vi>Đặt hàng thành công!</span>
+              </h2>
+              <p class="text-soft mt-2">
+                <span lang-en>Order number</span
+                ><span lang-vi>Mã đơn hàng</span>:
+                <strong id="confirm-order-id"></strong>
+              </p>
+              <p class="text-faint">
+                <span lang-en>A confirmation email has been sent to you.</span
+                ><span lang-vi>Email xác nhận đã được gửi đến bạn.</span>
+              </p>
+              <div class="d-flex justify-content-center gap-3 mt-4">
+                <a href="account.html#orders" class="btn-rf btn-rf-outline"
+                  ><span lang-en>View orders</span
+                  ><span lang-vi>Xem đơn hàng</span></a
+                >
+                <a href="catalog.html" class="btn-rf btn-rf-primary"
+                  ><span lang-en>Continue shopping</span
+                  ><span lang-vi>Tiếp tục mua sắm</span></a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="order-summary">
+              <h6 class="mb-3">
+                <span lang-en>Order summary</span
+                ><span lang-vi>Tóm tắt đơn hàng</span>
+              </h6>
+              <div id="checkout-lines-mini"></div>
+              <div class="divider my-3"></div>
+              <div class="order-summary__row">
+                <span
+                  ><span lang-en>Subtotal</span
+                  ><span lang-vi>Tạm tính</span></span
+                ><span id="co-subtotal"></span>
+              </div>
+              <div
+                class="order-summary__row"
+                id="co-discount-row"
+                style="display: none"
+              >
+                <span class="text-volt"
+                  ><span lang-en>Discount</span
+                  ><span lang-vi>Giảm giá</span></span
+                ><span class="text-volt" id="co-discount"></span>
+              </div>
+              <div class="order-summary__row">
+                <span
+                  ><span lang-en>Shipping</span
+                  ><span lang-vi>Vận chuyển</span></span
+                ><span
+                  ><span lang-en>Free</span><span lang-vi>Miễn phí</span></span
+                >
+              </div>
+              <div class="order-summary__row total">
+                <span
+                  ><span lang-en>Total</span
+                  ><span lang-vi>Tổng cộng</span></span
+                ><span id="co-total"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="rf-footer-mount"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/checkout.js"></script>
+    <script>
+      rfInjectLayout("checkout");
+      rfInitCheckout();
+
+      // AI FIX: Manual handler for the place order button progression
+      document
+        .getElementById("place-order-btn")
+        .addEventListener("click", function () {
+          const step3 = document.querySelector('[data-step="3"]');
+          const stepWaiting = document.querySelector('[data-step="waiting"]');
+          const stepDone = document.querySelector('[data-step="done"]');
+          const selectedPayment = document.querySelector(
+            'input[name="paymethod"]:checked',
+          )?.value;
+
+          // Hide Step 3 Review
+          if (step3) step3.style.display = "none";
+
+          // Generate a dummy order ID for the confirmation page
+          const orderIdElement = document.getElementById("confirm-order-id");
+          if (orderIdElement) {
+            orderIdElement.innerText =
+              "RF-" + Math.floor(100000 + Math.random() * 900000);
+          }
+
+          // Check if the user chose a QR payment method (ewallet or bank)
+          if (selectedPayment === "ewallet" || selectedPayment === "bank") {
+            if (stepWaiting) stepWaiting.style.display = "block";
+
+            // Auto-advance to confirmation after 3 seconds (simulating demo behavior)
+            setTimeout(() => {
+              if (stepWaiting) stepWaiting.style.display = "none";
+              if (stepDone) stepDone.style.display = "block";
+            }, 3000);
+          } else {
+            // For COD, go straight to completion
+            if (stepDone) stepDone.style.display = "block";
+          }
+        });
+    </script>
+  </body>
+</html>

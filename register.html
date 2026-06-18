@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create account — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-active="register" class="form-rf">
+    <div id="rf-header-mount"></div>
+
+    <main id="main">
+      <div class="auth-wrap">
+        <div class="auth-visual">
+          <img src="assets/logo-mascot-white.svg" alt="Rapidfeet mascot" />
+          <blockquote>
+            “<span lang-en>New drops, zero drag. Join the run.</span
+            ><span lang-vi>Hàng mới liên tục. Cùng bước nhanh hơn.</span>”
+          </blockquote>
+        </div>
+        <div class="auth-form-col">
+          <div class="auth-form-box">
+            <div class="auth-tabs">
+              <a href="login.html"
+                ><span lang-en>Sign in</span><span lang-vi>Đăng nhập</span></a
+              >
+              <a href="register.html" class="active"
+                ><span lang-en>Create account</span
+                ><span lang-vi>Tạo tài khoản</span></a
+              >
+            </div>
+
+            <button class="social-btn mb-2">
+              <i class="bi bi-google"></i>
+              <span lang-en>Continue with Google</span
+              ><span lang-vi>Tiếp tục với Google</span>
+            </button>
+            <button class="social-btn mb-2">
+              <i class="bi bi-facebook"></i>
+              <span lang-en>Continue with Facebook</span
+              ><span lang-vi>Tiếp tục với Facebook</span>
+            </button>
+            <button class="social-btn">
+              <i class="bi bi-instagram"></i>
+              <span lang-en>Continue with Instagram</span
+              ><span lang-vi>Tiếp tục với Instagram</span>
+            </button>
+
+            <div class="divider-text">
+              <span lang-en>or</span><span lang-vi>hoặc</span>
+            </div>
+
+            <form id="register-form" novalidate>
+              <div class="mb-3">
+                <label
+                  ><span lang-en>Full name</span
+                  ><span lang-vi>Họ và tên</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="fullname"
+                  required
+                />
+                <div class="invalid-feedback">
+                  <span lang-en>Please enter your name</span
+                  ><span lang-vi>Vui lòng nhập họ tên</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label
+                  ><span lang-en>Email</span><span lang-vi>Email</span></label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  required
+                />
+                <div class="invalid-feedback">
+                  <span lang-en>Enter a valid email</span
+                  ><span lang-vi>Vui lòng nhập email hợp lệ</span>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label
+                  ><span lang-en>Password</span
+                  ><span lang-vi>Mật khẩu</span></label
+                >
+                <div class="input-icon-wrap">
+                  <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    id="reg-password"
+                    required
+                    minlength="6"
+                  />
+                  <button type="button" class="pw-toggle-eye" data-toggle-pw>
+                    <i class="bi bi-eye"></i>
+                  </button>
+                </div>
+                <div class="pw-strength"><i></i><i></i><i></i><i></i></div>
+                <div class="invalid-feedback">
+                  <span lang-en>Password must be at least 6 characters</span
+                  ><span lang-vi>Mật khẩu phải có ít nhất 6 ký tự</span>
+                </div>
+              </div>
+              <div class="mb-4">
+                <label
+                  ><span lang-en>Confirm password</span
+                  ><span lang-vi>Xác nhận mật khẩu</span></label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  name="confirm"
+                  id="reg-confirm"
+                  required
+                />
+                <div class="invalid-feedback">
+                  <span lang-en>Passwords do not match</span
+                  ><span lang-vi>Mật khẩu không khớp</span>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label
+                  ><span lang-en>Default city</span
+                  ><span lang-vi>Thành phố mặc định</span></label
+                >
+                <select class="form-select" name="city" id="reg-city">
+                  <option value="">—</option>
+                  <option>Hồ Chí Minh</option>
+                  <option>Hà Nội</option>
+                  <option>Đà Nẵng</option>
+                  <option>Cần Thơ</option>
+                  <option>Hải Phòng</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label
+                  ><span lang-en>Default district (optional)</span
+                  ><span lang-vi
+                    >Quận/Huyện mặc định (không bắt buộc)</span
+                  ></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  name="district"
+                  id="reg-district"
+                  placeholder="District 1"
+                />
+              </div>
+              <label
+                class="filter-check mb-4"
+                style="padding: 0; align-items: flex-start"
+              >
+                <input type="checkbox" required style="margin-top: 3px" />
+                <span style="font-size: var(--fs-sm)"
+                  ><span lang-en>I agree to the</span
+                  ><span lang-vi>Tôi đồng ý với</span>
+                  <a href="warranty.html" style="text-decoration: underline"
+                    ><span lang-en>Terms</span
+                    ><span lang-vi>Điều khoản</span></a
+                  >
+                  <span lang-en>and</span><span lang-vi>và</span>
+                  <a href="returns.html" style="text-decoration: underline"
+                    ><span lang-en>Privacy Policy</span
+                    ><span lang-vi>Chính sách Bảo mật</span></a
+                  ></span
+                >
+              </label>
+              <button
+                type="submit"
+                class="btn-rf btn-rf-primary btn-rf-block btn-rf-lg"
+              >
+                <span lang-en>Create account</span
+                ><span lang-vi>Tạo tài khoản</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="rf-footer-mount"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      rfInjectLayout("register");
+      rfInitRegisterPage();
+    </script>
+  </body>
+</html>
