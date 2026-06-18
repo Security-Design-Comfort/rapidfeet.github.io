@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="../logo/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-active="wishlist">
+    <div id="rf-header-mount"></div>
+
+    <main id="main">
+      <div
+        class="container-rf"
+        style="padding-bottom: var(--sp-9); padding-top: var(--sp-6)"
+      >
+        <h1 class="display italic-slant mb-4" style="font-size: var(--fs-xl)">
+          <span lang-en>Your wishlist</span
+          ><span lang-vi>Sản phẩm yêu thích</span>
+        </h1>
+
+        <div id="wishlist-empty" style="display: none" class="empty-state">
+          <i class="bi bi-heart"></i>
+          <h3>
+            <span lang-en>Nothing saved yet</span
+            ><span lang-vi>Chưa có sản phẩm nào</span>
+          </h3>
+          <p>
+            <span lang-en
+              >Tap the heart icon on any product to save it here.</span
+            ><span lang-vi
+              >Nhấn vào biểu tượng tim trên sản phẩm để lưu vào đây.</span
+            >
+          </p>
+          <a href="catalog.html" class="btn-rf btn-rf-primary"
+            ><span lang-en>Browse shoes</span
+            ><span lang-vi>Xem sản phẩm</span></a
+          >
+        </div>
+
+        <div class="row g-4" id="wishlist-grid"></div>
+      </div>
+    </main>
+
+    <div id="rf-footer-mount"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/product-card.js"></script>
+    <script>
+      rfInjectLayout("wishlist");
+
+      function renderWishlist() {
+        const items = RF_STATE.wishlist
+          .map((id) => rfGetProduct(id))
+          .filter(Boolean);
+        const grid = document.getElementById("wishlist-grid");
+        const empty = document.getElementById("wishlist-empty");
+        if (items.length === 0) {
+          empty.style.display = "block";
+          grid.style.display = "none";
+          return;
+        }
+        empty.style.display = "none";
+        grid.style.display = "flex";
+        grid.innerHTML = items.map((p) => rfProductCardHTML(p)).join("");
+        rfBindProductCardEvents();
+        window.rfObserveReveals?.();
+        // re-render if item removed from wishlist
+        document.querySelectorAll("[data-wish-btn]").forEach((btn) => {
+          btn.addEventListener("click", () => setTimeout(renderWishlist, 150));
+        });
+      }
+      renderWishlist();
+    </script>
+  </body>
+</html>

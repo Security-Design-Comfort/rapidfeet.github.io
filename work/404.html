@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page not found — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="../logo/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div id="rf-header-mount"></div>
+
+    <main id="main">
+      <div class="error-page">
+        <div class="big-num">404</div>
+        <h2 class="display italic-slant mt-2" style="font-size: var(--fs-lg)">
+          <span lang-en>This page took a wrong turn.</span
+          ><span lang-vi>Trang này đã đi lạc.</span>
+        </h2>
+        <p class="text-soft mt-2 mb-5" style="max-width: 420px">
+          <span lang-en
+            >The page you're looking for doesn't exist or may have moved. Let's
+            get you back on track.</span
+          >
+          <span lang-vi
+            >Trang bạn tìm không tồn tại hoặc đã được di chuyển. Hãy quay lại
+            trang chủ.</span
+          >
+        </p>
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+          <a href="index.html" class="btn-rf btn-rf-primary"
+            ><i class="bi bi-house"></i> <span lang-en>Back to home</span
+            ><span lang-vi>Về trang chủ</span></a
+          >
+          <a href="catalog.html" class="btn-rf btn-rf-outline"
+            ><span lang-en>Browse shoes</span
+            ><span lang-vi>Xem sản phẩm</span></a
+          >
+        </div>
+      </div>
+    </main>
+
+    <div id="rf-footer-mount"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script>
+      rfInjectLayout("");
+    </script>
+  </body>
+</html>

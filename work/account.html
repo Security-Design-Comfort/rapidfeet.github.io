@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My account — Rapidfeet</title>
+    <link rel="icon" type="image/x-icon" href="../logo/favicon/favicon.ico" />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/components-2.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body data-active="account" class="form-rf">
+    <div id="rf-header-mount"></div>
+
+    <main id="main">
+      <div
+        class="container-rf"
+        style="padding-bottom: var(--sp-9); padding-top: var(--sp-6)"
+      >
+        <div id="account-guest" style="display: none" class="empty-state">
+          <i class="bi bi-person-circle"></i>
+          <h3>
+            <span lang-en>You're not signed in</span
+            ><span lang-vi>Bạn chưa đăng nhập</span>
+          </h3>
+          <p>
+            <span lang-en
+              >Sign in to view your account, orders, and saved items.</span
+            ><span lang-vi
+              >Đăng nhập để xem tài khoản, đơn hàng và sản phẩm đã lưu.</span
+            >
+          </p>
+          <a href="login.html" class="btn-rf btn-rf-primary"
+            ><span lang-en>Sign in</span><span lang-vi>Đăng nhập</span></a
+          >
+        </div>
+
+        <div id="account-content" style="display: none">
+          <div class="account-layout">
+            <aside>
+              <div
+                class="d-flex align-items-center gap-3 mb-4 p-3"
+                style="border: 1px solid var(--border)"
+              >
+                <div
+                  style="
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 50%;
+                    background: var(--ember);
+                    color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 800;
+                    font-size: 1.2rem;
+                  "
+                  id="avatar-initial"
+                ></div>
+                <div>
+                  <div style="font-weight: 700" id="account-name-display"></div>
+                  <div
+                    class="text-faint"
+                    style="font-size: var(--fs-xs)"
+                    id="account-email-display"
+                  ></div>
+                </div>
+              </div>
+              <nav class="account-nav">
+                <a href="#profile" class="active" data-account-tab="profile"
+                  ><i class="bi bi-person"></i> <span lang-en>Profile</span
+                  ><span lang-vi>Hồ sơ</span></a
+                >
+                <a href="#orders" data-account-tab="orders"
+                  ><i class="bi bi-bag-check"></i> <span lang-en>Orders</span
+                  ><span lang-vi>Đơn hàng</span></a
+                >
+                <a href="wishlist.html"
+                  ><i class="bi bi-heart"></i> <span lang-en>Wishlist</span
+                  ><span lang-vi>Yêu thích</span></a
+                >
+                <a href="#" id="logout-link"
+                  ><i class="bi bi-box-arrow-right"></i>
+                  <span lang-en>Sign out</span><span lang-vi>Đăng xuất</span></a
+                >
+              </nav>
+            </aside>
+
+            <div>
+              <!-- PROFILE TAB -->
+              <div data-account-panel="profile">
+                <h4 class="mb-4">
+                  <span lang-en>Profile information</span
+                  ><span lang-vi>Thông tin hồ sơ</span>
+                </h4>
+                <form id="profile-form">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label
+                        ><span lang-en>Full name</span
+                        ><span lang-vi>Họ và tên</span></label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="profile-name"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label
+                        ><span lang-en>Email</span
+                        ><span lang-vi>Email</span></label
+                      >
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="profile-email"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label
+                        ><span lang-en>Phone</span
+                        ><span lang-vi>Điện thoại</span></label
+                      >
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="profile-phone"
+                        placeholder="+84"
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label
+                        ><span lang-en>Date of birth</span
+                        ><span lang-vi>Ngày sinh</span></label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="profile-dob"
+                      />
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-rf btn-rf-primary mt-4">
+                    <span lang-en>Save changes</span
+                    ><span lang-vi>Lưu thay đổi</span>
+                  </button>
+                </form>
+              </div>
+
+              <!-- ORDERS TAB -->
+              <div data-account-panel="orders" style="display: none">
+                <h4 class="mb-4">
+                  <span lang-en>Order history</span
+                  ><span lang-vi>Lịch sử đơn hàng</span>
+                </h4>
+                <div id="orders-list"></div>
+                <div
+                  id="orders-empty"
+                  class="empty-state"
+                  style="display: none"
+                >
+                  <i class="bi bi-bag"></i>
+                  <h3>
+                    <span lang-en>No orders yet</span
+                    ><span lang-vi>Chưa có đơn hàng</span>
+                  </h3>
+                  <p>
+                    <span lang-en>Your placed orders will show up here.</span
+                    ><span lang-vi>Đơn hàng của bạn sẽ hiển thị tại đây.</span>
+                  </p>
+                  <a href="catalog.html" class="btn-rf btn-rf-primary"
+                    ><span lang-en>Start shopping</span
+                    ><span lang-vi>Mua sắm ngay</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="rf-footer-mount"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/layout.js"></script>
+    <script src="js/account.js"></script>
+    <script>
+      rfInjectLayout("account");
+      rfInitAccountPage();
+    </script>
+  </body>
+</html>

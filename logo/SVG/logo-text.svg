@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_3" data-name="Layer 3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 655.31 142.32">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: InterItalic-BoldItalic, Inter;
+        font-size: 120px;
+        font-style: italic;
+        font-variation-settings: 'opsz' 14, 'wght' 700;
+        font-weight: 700;
+      }
+
+      .cls-3 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-6 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-9 {
+        letter-spacing: -.02em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <text class="cls-2" transform="translate(0 103.65)"><tspan class="cls-7" x="0" y="0">R</tspan><tspan class="cls-8" x="79.02" y="0">A</tspan><tspan class="cls-9" x="165.87" y="0">P</tspan><tspan class="cls-1" x="241.23" y="0">I</tspan><tspan class="cls-3" x="275.28" y="0">D</tspan><tspan class="cls-4" x="360.47" y="0">F</tspan><tspan class="cls-5" x="428.2" y="0">E</tspan><tspan class="cls-6" x="500.02" y="0">E</tspan><tspan x="570.53" y="0">T</tspan></text>
+  </g>
+</svg>
