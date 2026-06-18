@@ -423,7 +423,7 @@ const RF_PRODUCTS = [
   },
   {
     id: "P1013",
-    name: "MLB Chunky CLassic Varsity Boston Red Sox",
+    name: "MLB Chunky Classic Varsity Boston Red Sox",
     brand: "MLB",
     category: "Lifestyle",
     price: 3590000,
